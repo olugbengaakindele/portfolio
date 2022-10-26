@@ -1,5 +1,6 @@
+from tokenize import String
 from flask_wtf import FlaskForm
-from wtforms import StringField,DateField,SubmitField,DecimalField, EmailField,PasswordField
+from wtforms import IntegerField,BooleanField, SelectField,StringField,DateField,SubmitField,DecimalField, EmailField,PasswordField
 from wtforms.validators import DataRequired, EqualTo,ValidationError,Email, Length
 from app.expense.models import Users
 
@@ -9,12 +10,17 @@ def email_exist(form, field):
     if email:
         raise ValidationError("User already exist please go to login")
 
+def email_exist(form, field):
+    email = Users.query.filter_by(user_email = field.data).first()
+    if email:
+        raise ValidationError("User already exist please go to login")
 
 class LoginForm(FlaskForm):
 
     email = EmailField("Email", validators=[DataRequired()])
-    password= StringField("Password", validators=[DataRequired()])
+    password= PasswordField("Password", validators=[DataRequired()])
     submit= SubmitField("Submit")
+    stay_logged_in = BooleanField("Rememeber me")
 
 class RegForm(FlaskForm):
     username= StringField("User Name",validators=[DataRequired()])
@@ -26,9 +32,17 @@ class RegForm(FlaskForm):
 
 class ExpenseForm(FlaskForm):
 
-    item = StringField("Item", validators=[DataRequired()])
-    cate= StringField("Category", validators=[DataRequired()])
-    amt = DecimalField("Amount", validators=[DataRequired()])
+    item =SelectField("Item", choices= [("Expense","Expense"),("Income","Income")], validators=[DataRequired()])
+    cate= SelectField("Category", validators=[DataRequired()])
+    amt = IntegerField("Amount", validators=[DataRequired()])
     date = DateField("Date", validators=[DataRequired()])
-    comment  = StringField("Comment", validators=[DataRequired()])
+    comment  = StringField("Comment")
     submit= SubmitField("Submit")
+
+class SettingsForm(FlaskForm):
+    record_type = SelectField("Type",choices=[("Income","Income"),("Expense","Expense")])
+    category = StringField("Category", validators=[DataRequired()])
+    submit = SubmitField("Submit")
+
+class DeleteForm(FlaskForm):
+    submit = SubmitField("Delete")

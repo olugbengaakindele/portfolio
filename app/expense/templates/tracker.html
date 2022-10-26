@@ -1,1 +1,63 @@
 {% extends 'layout.html' %}
+
+{% block content %}
+
+    <div class="row">
+        <h2>Income - Expense Tracker</h2>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-md-4 col-sm-12">
+            <div class="card bg-success">
+                <div class="card-body">
+                    <h6>Budget: $12,000</h6>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-sm-12">
+            <div class="card bg-danger">
+                <div class="card-body">
+                    <h6>Spent: $8,000</h6>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-sm-12">
+            <div class="card">
+                <div class="card-body bg-secondary">
+                    <h6>Saving: $4,000</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mt-5 col-md-4 col-sm-12 mx-auto">
+        <form method="post">
+            {{ form.hidden_tag() }}
+
+            <div class="form-group">
+                {{form.item.label (class ="form-label")}} {{ form.item(class="form-control my-2 py-2 placeholder = email") }}
+            </div>
+            <div class="form-group">
+                {{form.cate.label (class ="form-label")}} {{ form.cate(class="form-control my-2 py-2 placeholder = email") }}
+            </div>
+            <div class="form-group">
+                {{form.amt.label (class ="form-label")}} {{ form.amt(class="form-control my-2 py-2 placeholder = email") }}
+            </div>
+            <div class="form-group">
+                {{form.date.label (class ="form-label")}} {{ form.date(class="form-control my-2 py-2 placeholder = email") }}
+            </div>
+            <div class="form-group">
+                {{form.comment.label (class ="form-label")}} {{ form.comment(class="form-control my-2 py-2 placeholder = email") }}
+            </div>
+            <div class="form-group">
+                {{form.submit(class="btn btn-primary")}}
+            </div>
+        </form>
+
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script src = "{{url_for('static' ,filename ='js/tracker.js') }}"></script>
+{% endblock  %}

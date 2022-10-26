@@ -1,13 +1,20 @@
 from app import create_app,db
 from app.expense.models import *
+from datetime import datetime
+
 if __name__ == '__main__':
     flask_app =create_app('dev')
 
     with flask_app.app_context():
         db.create_all()
         if not Users.query.filter_by(user_email ="Akindele@gmail.com").first():
-            Users.createUser(email="Akindele@gmail.com",password= "Kolu",name ="Olu")
-    
+            Users.createUser(email="Akindele@gmail.com",password= "olu",name ="Olu")
+
+        if not Settings.query.filter_by(user_id =1 ).first():
+            Settings.newSetting(type="test",category= "test",user_id=1)
+        
+        if not Expense.query.filter_by(expense_user_id =1 ).first():
+            Expense.new_expense( "income","test",0.0,datetime.now(),  "test", 1)
     
     flask_app.run(debug =True)
 

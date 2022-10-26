@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+    <div class="row">
+        <h2>Income - Expense Tracker</h2>
+    </div>
+
+    <div class="row mt-5">
+        <form action="" method="post">
+            {{ form.hidden_tag() }}
+
+            <div class="form-group">
+                <h6>You are about to delete  {{ cate.category }}  from {{ cate.type }} type. Please click on delete button to remove. </h6>
+            </div>
+            
+            <div class="form-group">
+                {{form.submit(class="btn btn-primary")}}
+            </div>
+        </form>
+
+    </div>
+
+{% endblock %}
+
