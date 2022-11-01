@@ -1,7 +1,8 @@
 let type_filed = document.getElementById('item');
 let cate_filed = document.getElementById('cate');
+let body = document.getElementById("body")
 
-type_filed.onchange = function(){
+const cate_change = function(){
     type = type_filed.value ;
     route = 'http://127.0.0.1:5000/expense/'+ type.toLowerCase()
     
@@ -15,4 +16,7 @@ type_filed.onchange = function(){
         })
     });
 
-}
+};
+
+body.onload = cate_change
+type_filed.onchange = cate_change

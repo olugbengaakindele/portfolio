@@ -1,0 +1,64 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+    <div class="row mt-5">
+
+        <div class="container col-md-3">
+                <div class="row">
+                    <h5>Filters</h5>
+                </div>
+                {{ min_datee }}
+                <div class="row mt-3">
+                    <div class="Form-group">
+                        <label for="Start_Date">Star Date:</label>
+                        <input type="date" id="Start_Date" name="{{current_user.id}}" value = "{{ min_date}}" >
+                    </div>
+                </div>
+                
+                <div class="row mt-3">
+                    <div class="Form-group">
+                        <label for="End_Date">End Date:</label>
+                        <input type="date" id="End_Date" name="{{current_user.id}}" value = "{{ max_date}}">
+                    </div>
+                </div>
+      
+        </div>
+
+        <div class="container col-md-6">
+            <div class="row mt-3">
+                <div class="col-md-4 col-sm-12">
+                    <div class="card bg-success">
+                        <div class="card-body">
+                            <h6 id="Income">Income: $12,000</h6>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="col-md-4 col-sm-12">
+                    <div class="card bg-danger">
+                        <div class="card-body">
+                            <h6 id="Expense">Expense: $8,000</h6>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-12">
+                    <div class="card">
+                        <div class="card-body bg-secondary">
+                            <h6 id="Savings">Saving: $4,000</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+    </div>
+        
+    
+{% endblock %}
+
+{% block js %}
+    <script src = "{{url_for('static' ,filename ='js/expense_dashboard.js') }}"></script>
+{% endblock  %}

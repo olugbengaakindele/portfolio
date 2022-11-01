@@ -13,10 +13,11 @@
             {% for message in get_flashed_messages() %}
                 <div class="container alert alert-info">
                     <button type="button" class="close mx-auto" data-dismiss="alert">
-                           <h6>{{ message }}</h6> 
+                        <h6>{{ message }}</h6> 
                     </button>
                 </div>
             {% endfor %} 
+
             <form method ="POST" action="">
                 {{ form.hidden_tag() }}
                 <div class="form-group">
@@ -29,7 +30,6 @@
                 <div class="text-center mt-3">
                     {{ form.submit (class ="btn btn-primary")}}
                 </div>
-
             </form>
             
         </div>
@@ -39,7 +39,7 @@
     <div class="row">
         {% if all_list  %} 
 
-           <table class="table table-striped">
+        <table class="table table-striped">
             <thead>
                 <tr>
                   <th>Type</th>
@@ -56,6 +56,7 @@
                     </tr>
                 {% endfor %}
             </tbody>
+        </table>
         {%  else %}    
             <h6>You have no settings </h6>
         {% endif %}

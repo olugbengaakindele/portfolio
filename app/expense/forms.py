@@ -1,3 +1,4 @@
+from email.policy import default
 from tokenize import String
 from flask_wtf import FlaskForm
 from wtforms import IntegerField,BooleanField, SelectField,StringField,DateField,SubmitField,DecimalField, EmailField,PasswordField
@@ -46,3 +47,4 @@ class SettingsForm(FlaskForm):
 
 class DeleteForm(FlaskForm):
     submit = SubmitField("Delete")
+

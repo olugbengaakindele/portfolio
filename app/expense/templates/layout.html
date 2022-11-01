@@ -13,7 +13,7 @@
         <title>{{ title }}</title>
     </head>
     {% endblock %}
-    <body>
+    <body id="body">
         
         <div class ="container">
             <div class="bg-dark navbar-dark">    
@@ -27,7 +27,7 @@
                             <li class="nav-item">
                               <a class="nav-link active" aria-current="page" href="{{url_for('expense.home_page')}}">About Me</a>
                             </li>
-                           
+                        
 
                             {% if project == "aboutme" %}
                             
@@ -85,10 +85,12 @@
                                     </li>    
                                 {% endif %}
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">Contact</a>
+                                    <a class="nav-link" href="{{ url_for('expense.expense_dashboard') }}">Dashboard</a>
                                 </li>
 
-
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Contact</a>
+                                </li>
                             {% endif %}
                           </ul>
                     </div>
