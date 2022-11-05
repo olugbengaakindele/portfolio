@@ -30,8 +30,8 @@
                             <td>{{ lst.expense_Amount }}</td>
                             <td>{{ lst.expense_date }}</td>
                             <td>{{lst.expense_comment }}</td>
-                            <td><a href="{{url_for('expense.edit_exp', exp_id= lst.expense_id) }}">Delete</a></td>
-                            <td><a href="{{url_for('expense.delete_exp', cat_id= lst.id) }}">Delete</a></td>
+                            <!-- <td><a href="{{url_for('expense.edit_exp', expense_id= lst.expense_id) }}">Delete</a></td> -->
+                            <!-- <td><a href="{{url_for('expense.delete_exp', expense_id=lst.expense_id) }}">Delete</a></td> -->
                         </tr>
                     {% endfor %}
                 </tbody>

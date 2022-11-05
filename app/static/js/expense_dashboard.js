@@ -48,6 +48,13 @@ const card_func = function() {
  return true;
 };
 
+// const ass= [1,2,3]
+// let bn = new Array()
+// ass.forEach(function(ad){
+//     bn.push(ad)
+// })
+
+// console.log(bn)
 console.log(card_func() );
 start_date.onchange = card_func;
 

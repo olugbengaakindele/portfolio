@@ -41,10 +41,10 @@
                         {{form.comment.label (class ="form-label")}} {{ form.comment(class="form-control my-2 py-2 placeholder = email") }}
                     </div>
                     <div class="form-group mb-2">
-                        {{form.submit(class="btn btn-primary")}}
+                        {{form.submit(class="btn btn-primary")}} <button><a href="{{url_for('expense.edit_expense') }}">Edit Record</a></button>
                     </div>
                     <div class="form-group mb-2">
-                        <button><a href="{{url_for('expense.edit_expense') }}">Edit Record</a></button>
+                       
                     </div>
                 </form>
                 

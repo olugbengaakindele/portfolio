@@ -192,4 +192,3 @@ def edit_expense():
     all_records=Expense.query.filter_by(expense_user_id = current_user.id).order_by(Expense.expense_date.desc())
 
     return render_template("display_expenses.html",title='login',  project = "expense", all_list= all_records)
-
