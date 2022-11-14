@@ -63,6 +63,7 @@ def do_the_login():
 def expense_tracker():
     form = ExpenseForm()
     all_cates = Settings.query.filter_by(user_id = current_user.id,type = "income")
+    all_user_records = Expense.query.filter_by(expense_user_id = current_user.id).order_by(text("expense_entry_date")).limit(5).all() 
     form.cate.choices = [(ct.category, ct.category) for ct in all_cates]
     
     if request.method == "POST":
@@ -75,7 +76,7 @@ def expense_tracker():
         flash('A new record has been created')
         return redirect(url_for('expense.expense_tracker'))
 
-    return render_template("tracker.html", title='tracker', form = form , project = "expense")
+    return render_template("tracker.html", title='tracker', form = form , project = "expense" , recent_records=all_user_records)
 
 @expense.route("/expense/settings", methods=["GET","POST"])
 @login_required
@@ -85,7 +86,7 @@ def expense_settings():
     category = form.category.data
     user_id = current_user.id
     all_list = False
-    all_list = Settings.query.filter_by(user_id= current_user.id).order_by(text("Date desc"))
+    all_list = Settings.query.filter_by(user_id= current_user.id).order_by(text("Date desc")).limit(5).all() 
 
     if form.validate_on_submit():
         Settings.newSetting(type.lower(),category.lower().strip(),user_id)

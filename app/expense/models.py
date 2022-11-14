@@ -51,6 +51,7 @@ class Expense(db.Model):
     expense_date= db.Column(db.DateTime, nullable = False)
     expense_comment = db.Column(db.String(200),nullable = True)
     expense_user_id= db.Column(db.Integer,db.ForeignKey('users.id'))
+    expense_entry_date = db.Column(db.DateTime, default=datetime.utcnow())
 
     def __init__(self, expense_name, expense_category,expense_amount,expense_date,expense_comment,expense_user_id):
         self.expense_name=expense_name

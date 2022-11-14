@@ -28,11 +28,12 @@
                     <div class="form-group">
                         {{form.category.label (class ="mt-2")}} {{ form.category(class="form-control my-2 py-2 placeholder = password") }}
                     </div>
-                    <div class="text-center mt-3">
+                    <div class="text-left mt-3">
                         {{ form.submit (class ="btn btn-primary")}}
                     </div>
+
                 </form>
-                
+                <hr>
         
             <div class="row">
                 {% if all_list  %} 
@@ -63,8 +64,6 @@
 
          </div>    
     </div>
-
-   
 
 {% endblock %}
 
