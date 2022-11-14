@@ -2,14 +2,15 @@
 
 {% block content %}
 
-    <div class="row">
-        <h2>Income - Expense Tracker</h2>
-    </div>
+    
 
     <div class="row mt-5">
 
         <div class="container mx-auto col-md-6">
-   
+            <div class="row">
+                    <h2>Income - Expense Category Setting</h2>
+                    <hr>
+            </div>
             {% for message in get_flashed_messages() %}
                 <div class="container alert alert-info">
                     <button type="button" class="close mx-auto" data-dismiss="alert">
@@ -18,50 +19,52 @@
                 </div>
             {% endfor %} 
 
-            <form method ="POST" action="">
-                {{ form.hidden_tag() }}
-                <div class="form-group">
-                    {{form.record_type.label (class ="form-label")}} {{ form.record_type (class="form-control my-2 py-2 placeholder = email") }}
-                </div>
+                <form method ="POST" action="">
+                    {{ form.hidden_tag() }}
+                    <div class="form-group">
+                        {{form.record_type.label (class ="form-label")}} {{ form.record_type (class="form-control my-2 py-2 placeholder = email") }}
+                    </div>
+                    
+                    <div class="form-group">
+                        {{form.category.label (class ="mt-2")}} {{ form.category(class="form-control my-2 py-2 placeholder = password") }}
+                    </div>
+                    <div class="text-center mt-3">
+                        {{ form.submit (class ="btn btn-primary")}}
+                    </div>
+                </form>
                 
-                <div class="form-group">
-                    {{form.category.label (class ="mt-2")}} {{ form.category(class="form-control my-2 py-2 placeholder = password") }}
-                </div>
-                <div class="text-center mt-3">
-                    {{ form.submit (class ="btn btn-primary")}}
-                </div>
-            </form>
-            
-        </div>
+        
+            <div class="row">
+                {% if all_list  %} 
 
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                            <th>Type</th>
+                            <th>Category</th>
+                            <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for lst in all_list %}
+                                <tr>
+                                    <td>{{ lst.type }}</td>
+                                    <td>{{ lst.category }}</td>
+                                    <td><a href="{{url_for('expense.delete_cat', cat_id= lst.id) }}">Delete</a></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    {%  else %}    
+                        <h6>You have no settings </h6>
+                    {% endif %}
+
+            </div>
+
+         </div>    
     </div>
 
-    <div class="row">
-        {% if all_list  %} 
-
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                  <th>Type</th>
-                  <th>Category</th>
-                  <th>Delete</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for lst in all_list %}
-                    <tr>
-                        <td>{{ lst.type }}</td>
-                        <td>{{ lst.category }}</td>
-                        <td><a href="{{url_for('expense.delete_cat', cat_id= lst.id) }}">Delete</a></td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        {%  else %}    
-            <h6>You have no settings </h6>
-        {% endif %}
-
-    </div>
+   
 
 {% endblock %}
 

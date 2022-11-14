@@ -9,9 +9,15 @@ const cate_change = function(){
     fetch(route).then( function(response) {
         response.json().then(function(data){
             let opt_htm = '';
-            for (let cates of data.type ){
+            if ( (data.type).length == 0 ){
+                opt_htm += '<option value="' + "opt_1"+ '">'+ "Go to settings to create categories" + '</option>';
+            } else {
+                for (let cates of data.type ){
                 opt_htm += '<option value="' + cates.category + '">'+ cates.category + '</option>';
             }
+
+            }
+           
                 cate_filed.innerHTML = opt_htm;
         })
     });

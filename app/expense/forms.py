@@ -1,7 +1,7 @@
 from email.policy import default
 from tokenize import String
 from flask_wtf import FlaskForm
-from wtforms import IntegerField,BooleanField, SelectField,StringField,DateField,SubmitField,DecimalField, EmailField,PasswordField
+from wtforms import IntegerField,BooleanField, SelectField,StringField,DateField,SubmitField,DecimalField, EmailField,PasswordField, TextAreaField
 from wtforms.validators import DataRequired, EqualTo,ValidationError,Email, Length
 from app.expense.models import Users
 
@@ -37,12 +37,12 @@ class ExpenseForm(FlaskForm):
     cate= SelectField("Category", validators=[DataRequired()])
     amt = IntegerField("Amount", validators=[DataRequired()])
     date = DateField("Date", validators=[DataRequired()])
-    comment  = StringField("Comment")
+    comment  = TextAreaField("Comment")
     submit= SubmitField("Submit")
 
 class SettingsForm(FlaskForm):
-    record_type = SelectField("Type",choices=[("Income","Income"),("Expense","Expense")])
-    category = StringField("Category", validators=[DataRequired()])
+    record_type = SelectField("Choose type",choices=[("Income","Income"),("Expense","Expense")])
+    category = StringField("Enter a category", validators=[DataRequired()])
     submit = SubmitField("Submit")
 
 class DeleteForm(FlaskForm):

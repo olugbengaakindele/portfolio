@@ -2,76 +2,91 @@
 
 {% block content %}
 
-    <div class="row mt-5 pt-5">
+    <section class="form my-4 mx-5">
         
-        <div class="col-12 col-sm-8 col-md-6 m-auto">
-            <div class="card my-auto mx-auto">
-                <div class="card-body border-0 shadow">
-                    <div class="text-center">
-                        <svg xmlns="http://www.w3.org/2000/svg"  width="75" height="100" fill="currentColor" 
-                            class = "mx-auto my-3" viewBox="0 0 16 16">
-                        <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-                        </svg>
-                    </div>
-                    
+        <div class="container border-1">
+
+            <div class="row no-gutters">
+                <!-- picture part -->
+                <div class="col-lg-5">
+                    <img src="{{url_for('static',filename= 'css/pics/account.jpg')}}" style="width:100%; height :100%" class= "img-rounded" alt="">
+                </div>
+
+                 <!-- form part -->
+                <div class="col-lg-7 px-5 py-5">
+                    <h3 class ="font-weight-bold py-3">Create an account</h3>
+                
                     <form method = "POST" action="">
                         {{ form.hidden_tag() }}
 
-                        <div class="form-group">
+                        <div class="form-row">
+                        <div class="col-lg-7">
                             {% if form.username.errors  %}
                                 <div class="">
                                     {% for error in form.username.errors %}
-                                     <span>{{ error }}</span>
+                                    <span>{{ error }}</span>
                                     {% endfor %}
                                 </div>
                                 {{form.username(class='form-control my-2 py-2 is-invalid')}}
                             {% else %}
-                                {{form.username.label (class ="form-label")}} {{ form.username(class='form-control my-2 py-2', placeholder = 'Your name') }}
+                                {{ form.username(class='form-control my-2 py-2', placeholder = 'Enter a user name') }}
                             {% endif %}    
                         </div>
-
-                        <div class="form-group">
+                    </div>
+                
+                        
+                    <div class="form-row">
+                        <div class="col-lg-7  my-2 py-2">
                             {% if form.email.errors  %}
                                 <div class="">
                                     {% for error in form.email.errors %}
-                                     <span>{{ error }}</span>
+                                    <span>{{ error }}</span>
                                     {% endfor %}
                                 </div>
                                 {{form.email(class='form-control my-2 py-2 is-invalid')}}
                             {% else %}
-                                {{form.email.label (class ="form-label")}} {{ form.email(class='form-control my-2 py-2', placeholder = 'email') }}
+                               {{ form.email(class='form-control my-2 py-2', placeholder = 'email') }}
                             {% endif %}    
                         </div>
+                    </div>
 
-                        <div class="form-group">
+                    <div class="form-row">
+                        <div class="col-lg-7  my-2 py-2"> 
                             {% if form.password.error %}
-                                <div class="">                                
-                                    {% for error in form.password.errors %}
-                                    <span>{{ error }}</span>
-                                    {% endfor %}
-                                </div>
-                                {{form.password.label (class ="mt-2")}} {{ form.password (class='form-control my-2 py-2',placeholder = 'password') }}
-                            
+                                                        
+                                {% for error in form.password.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                                    
+                                {{ form.password (class='form-control my-2 py-2',placeholder = 'password') }}
+                        
                             {% else %}
-                                {{form.password.label (class ="mt-2")}} {{ form.password (class='form-control my-2 py-2', placeholder = 'password') }}             
+                                {{ form.password (class='form-control my-2 py-2', placeholder = 'password') }}             
                             {% endif %}
                         </div>
-                        
-                        <div class="form-group">
-                            {{form.confirm_password.label (class ="mt-2")}} {{ form.confirm_password (class='form-control my-2 py-2', placeholder = 'password') }}
-                        </div>
+                    </div>
 
-                        <div class="text-center mt-3">
-                            {{ form.submit (class ="btn btn-primary")}}
+                    <div class="form-row">
+                        <div class="col-lg-7 my-2 py-2">
+                        {{ form.confirm_password (class='form-control my-2 py-2', placeholder = 'password') }}
                         </div>
-                      
-                     </form>
+                    </div>
 
-                </div>
+                    <div class="text-center mt-3">
+                        {{ form.submit (class ="btn btn-primary")}}
+                    </div>
+                
+                </form>
+
             </div>
-            
+
         </div>
-    </div>
-   
+
+        
+    </section>
+
+  
+                    
+
 
 {% endblock %}
