@@ -8,23 +8,23 @@
     <form class="row g-3" method="post">
         {{ form.hidden_tag() }}
         <div class="form-outline col-md-6">
-            {{form.item.label (class ="bold form-label")}} {{ form.item(class="form-control my-2 py-2 placeholder = record type") }}
+            {{form.item.label (class ="fw-bold form-label")}} {{ form.item(class="form-control my-2 py-2 placeholder = record type") }}
         </div>
 
         <div class="form-outline col-md-6">
-            {{form.cate.label (class ="form-label")}} {{ form.cate(class="form-control my-2 py-2 placeholder = category") }}
+            {{form.cate.label (class ="fw-bold  form-label")}} {{ form.cate(class="form-control my-2 py-2 placeholder = category") }}
         </div>
 
         <div class="form-outline col-md-6">
-            {{form.amt.label (class ="form-label")}} {{ form.amt(class="form-control my-2 py-2 placeholder = amount") }}
+            {{form.amt.label (class ="fw-bold  form-label")}} {{ form.amt(class="form-control my-2 py-2 placeholder = amount") }}
         </div>
 
         <div class="form-outline col-md-6">
-            {{form.date.label (class ="form-label")}} {{ form.date(class="form-control my-2 py-2 placeholder = date") }}
+            {{form.date.label (class ="fw-bold  form-label")}} {{ form.date(class="form-control my-2 py-2 placeholder = date") }}
         </div>
 
         <div class="form-outline col-md-12">
-            {{form.comment.label (class ="form-label")}} {{ form.comment(class="form-control my-2 py-2 placeholder = email rows=3") }}
+            {{form.comment.label (class ="fw-bold form-label")}} {{ form.comment(class="form-control my-2 py-2 placeholder = email rows=3") }}
         </div>
 
         <div class="form-outline col-md-2">
@@ -54,17 +54,18 @@
                     {% for rec in recent_records %}
                         <tr>
                             <td>{{ rec.expense_name }}</td>
-                            <td>{{ rec.category }}</td>
+                            <td>{{ rec.expense_category }}</td>
                             <td>{{ rec.expense_amount}}</td>
                             <td>{{ rec.expense_date }}</td>
                             <td>{{ rec.expense_comment }}</td>
-                            <td class="text-center"><a href="{{url_for('expense.delete_cat', cat_id= rec.expense_id) }}" class="text-center">X</a></td>
+                            <td class="text-center"><a href="{{url_for('expense.delete_record', rec_id= rec.expense_id) }}" class="text-center">X</a></td>
                         </tr>
                     {% endfor %}
                 </tbody>
             </table>
-        {%  else %}    
-            <h6>You have no records expense / income records</h6>
+        {%  else %} 
+            <br>   
+            <h6 class="fw-bold">You have no records expense / income records</h6>
         {% endif %}
        
     </div>

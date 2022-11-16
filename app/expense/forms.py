@@ -33,7 +33,7 @@ class RegForm(FlaskForm):
 
 class ExpenseForm(FlaskForm):
 
-    item =SelectField("Item", choices= [("Expense","Expense"),("Income","Income")], validators=[DataRequired()])
+    item =SelectField("Record type", choices= [("Expense","Expense"),("Income","Income")], validators=[DataRequired()])
     cate= SelectField("Category", validators=[DataRequired()])
     amt = IntegerField("Amount", validators=[DataRequired()])
     date = DateField("Date", validators=[DataRequired()])

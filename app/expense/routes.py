@@ -126,7 +126,7 @@ def contact():
 def log_out_user():
     logout_user()
 
-    return render_template("index.html",title='login',  project = "expense")
+    return render_template("index.html",title='login',  project = "aboutme")
 
 @expense.route("/expense/delete/<cat_id>",methods=["GET","POST"])
 @login_required
@@ -193,3 +193,17 @@ def edit_expense():
     all_records=Expense.query.filter_by(expense_user_id = current_user.id).order_by(Expense.expense_date.desc())
 
     return render_template("display_expenses.html",title='login',  project = "expense", all_list= all_records)
+
+@expense.route("/expense/record/delete/<rec_id>", methods=['GET','POST'])
+def delete_record(rec_id):
+    record = Expense.query.filter_by(expense_id = rec_id).first()
+    form = DeleteForm()
+
+    if form.validate_on_submit():
+        db.session.delete(record)
+        db.session.commit()
+
+        return redirect(url_for('expense.expense_tracker'))
+
+
+    return render_template("delete_record.html",form=form, project ="expense", title="delete",rec =record)

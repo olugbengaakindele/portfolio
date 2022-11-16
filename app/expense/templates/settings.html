@@ -11,29 +11,23 @@
                     <h2>Income - Expense Category Setting</h2>
                     <hr>
             </div>
-            {% for message in get_flashed_messages() %}
-                <div class="container alert alert-info">
-                    <button type="button" class="close mx-auto" data-dismiss="alert">
-                        <h6>{{ message }}</h6> 
-                    </button>
+          
+
+            <form method ="POST" action="">
+                {{ form.hidden_tag() }}
+                <div class="form-group">
+                    {{form.record_type.label (class ="form-label")}} {{ form.record_type (class="form-control my-2 py-2 placeholder = email") }}
                 </div>
-            {% endfor %} 
+                
+                <div class="form-group">
+                    {{form.category.label (class ="mt-2")}} {{ form.category(class="form-control my-2 py-2 placeholder = password") }}
+                </div>
+                <div class="text-left mt-3">
+                    {{ form.submit (class ="btn btn-primary")}}
+                </div>
 
-                <form method ="POST" action="">
-                    {{ form.hidden_tag() }}
-                    <div class="form-group">
-                        {{form.record_type.label (class ="form-label")}} {{ form.record_type (class="form-control my-2 py-2 placeholder = email") }}
-                    </div>
-                    
-                    <div class="form-group">
-                        {{form.category.label (class ="mt-2")}} {{ form.category(class="form-control my-2 py-2 placeholder = password") }}
-                    </div>
-                    <div class="text-left mt-3">
-                        {{ form.submit (class ="btn btn-primary")}}
-                    </div>
-
-                </form>
-                <hr>
+            </form>
+            <hr>
         
             <div class="row">
                 {% if all_list  %} 
