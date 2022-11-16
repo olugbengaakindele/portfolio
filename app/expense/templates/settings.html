@@ -37,6 +37,7 @@
                             <tr>
                             <th>Type</th>
                             <th>Category</th>
+                            <th>Edit</th>
                             <th>Delete</th>
                             </tr>
                         </thead>
@@ -45,7 +46,8 @@
                                 <tr>
                                     <td>{{ lst.type }}</td>
                                     <td>{{ lst.category }}</td>
-                                    <td><a href="{{url_for('expense.delete_cat', cat_id= lst.id) }}">Delete</a></td>
+                                    <td><a href="{{url_for('expense.delete_cat', cat_id= lst.id) }}"><i class="bi bi-pencil"></i></a></td>
+                                    <td><a href="{{url_for('expense.delete_cat', cat_id= lst.id) }}"><i class="bi bi-trash"></i></a></td>
                                 </tr>
                             {% endfor %}
                         </tbody>

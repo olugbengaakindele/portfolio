@@ -47,7 +47,8 @@
                         <th>Amount</th>
                         <th>Date</th>
                         <th>Comment</th>
-                        <th class="text-center">Delete</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -58,7 +59,8 @@
                             <td>{{ rec.expense_amount}}</td>
                             <td>{{ rec.expense_date }}</td>
                             <td>{{ rec.expense_comment }}</td>
-                            <td class="text-center"><a href="{{url_for('expense.delete_record', rec_id= rec.expense_id) }}" class="text-center">X</a></td>
+                            <td class="text-center"><a href="{{url_for('expense.delete_record', rec_id= rec.expense_id) }}" class="text-center"><i class="bi bi-pencil"></i></a></td>
+                            <td class="text-center"><a href="{{url_for('expense.delete_record', rec_id= rec.expense_id) }}" class="text-center"><i class="bi bi-trash"></i></a></td>
                         </tr>
                     {% endfor %}
                 </tbody>
