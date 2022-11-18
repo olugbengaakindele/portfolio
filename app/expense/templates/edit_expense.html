@@ -3,7 +3,7 @@
 {% block content %}
 
 <div class="container col-md-6 mt-5">
-    <h2>Add a new record</h2>
+    <h2>Edit record</h2>
     <hr>
     <form class="row g-3" method="post">
         {{ form.hidden_tag() }}
@@ -59,7 +59,7 @@
                             <td>{{ rec.expense_amount}}</td>
                             <td>{{ rec.expense_date }}</td>
                             <td>{{ rec.expense_comment }}</td>
-                            <td class="text-center"><a href="{{url_for('expense.edit_record', rec_id= rec.expense_id) }}" class="text-center"><i class="bi bi-pencil"></i></a></td>
+                            <td class="text-center"><a href="{{url_for('expense.delete_record', rec_id= rec.expense_id) }}" class="text-center"><i class="bi bi-pencil"></i></a></td>
                             <td class="text-center"><a href="{{url_for('expense.delete_record', rec_id= rec.expense_id) }}" class="text-center"><i class="bi bi-trash"></i></a></td>
                         </tr>
                     {% endfor %}

@@ -207,3 +207,29 @@ def delete_record(rec_id):
 
 
     return render_template("delete_record.html",form=form, project ="expense", title="delete",rec =record)
+
+@expense.route("/expense/record/edit/<rec_id>", methods =["GET","POST"])
+def edit_record(rec_id):
+    record= Expense.query.filter_by(expense_id=rec_id).first()
+    form  = ExpenseForm()
+
+    form.cate.choices = [(record.expense_category, record.expense_category)]
+    form.item.choices = [(record.expense_name, record.expense_name)]
+    form.amt.data= record.expense_amount
+    form.date.data = record.expense_date
+    form.comment.data = record.expense_comment
+
+    if form.validate_on_submit():
+        record.expense_name = form.item.data
+        record.expense_category = form.cate.data
+        record.expense_amount = form.amt.data
+        record.expense_date=form.date.data
+        record.expense_comment = form.comment.data
+
+        db.session.add(record)
+        db.session.commit()
+
+        return redirect(url_for("expense.expense_tracker")) 
+
+    return render_template("edit_expense.html",form =form,title="edit record", project = "expense")
+
