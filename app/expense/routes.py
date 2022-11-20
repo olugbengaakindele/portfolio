@@ -208,28 +208,35 @@ def delete_record(rec_id):
 
     return render_template("delete_record.html",form=form, project ="expense", title="delete",rec =record)
 
-@expense.route("/expense/record/edit/<rec_id>", methods =["GET","POST"])
+@expense.route("/expense/record/edit/<rec_id>", methods =['GET','POST'])
+@login_required
 def edit_record(rec_id):
-    record= Expense.query.filter_by(expense_id=rec_id).first()
+    #record= Expense.query.filter_by(expense_id=rec_id).first()
+    record =Expense.query.get(rec_id)
     form  = ExpenseForm()
-
+    
     form.cate.choices = [(record.expense_category, record.expense_category)]
     form.item.choices = [(record.expense_name, record.expense_name)]
+    # form.cate.data = record.expense_category
+    # form.item.data = record.expense_name
     form.amt.data= record.expense_amount
     form.date.data = record.expense_date
     form.comment.data = record.expense_comment
 
     if form.validate_on_submit():
-        record.expense_name = form.item.data
-        record.expense_category = form.cate.data
-        record.expense_amount = form.amt.data
-        record.expense_date=form.date.data
-        record.expense_comment = form.comment.data
+        record.expense_name = request.form.get("item")
+        record.expense_category =  request.form.get("cate")
+        record.expense_amount =  request.form.get("amt")
+        record.expense_date = request.form.get("date")
+        record.expense_comment =  request.form.get("comment")
+        record.expense_user_id = current_user.id
 
-        db.session.add(record)
+        db.session.merge(record)
         db.session.commit()
 
+        flash("Your record has been edited")
         return redirect(url_for("expense.expense_tracker")) 
 
-    return render_template("edit_expense.html",form =form,title="edit record", project = "expense")
+    return render_template("edit_expense.html",form =form,title="edit record", 
+                            project = "expense", record= record)
 

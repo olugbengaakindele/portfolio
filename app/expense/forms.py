@@ -1,7 +1,7 @@
 from email.policy import default
 from tokenize import String
 from flask_wtf import FlaskForm
-from wtforms import IntegerField,BooleanField, SelectField,StringField,DateField,SubmitField,DecimalField, EmailField,PasswordField, TextAreaField
+from wtforms import DecimalRangeField,IntegerField,BooleanField, SelectField,StringField,DateField,SubmitField,DecimalField, EmailField,PasswordField, TextAreaField
 from wtforms.validators import DataRequired, EqualTo,ValidationError,Email, Length
 from app.expense.models import Users
 
@@ -35,7 +35,17 @@ class ExpenseForm(FlaskForm):
 
     item =SelectField("Record type", choices= [("Expense","Expense"),("Income","Income")], validators=[DataRequired()])
     cate= SelectField("Category", validators=[DataRequired()])
-    amt = IntegerField("Amount", validators=[DataRequired()])
+    amt =IntegerField("Amount", validators=[DataRequired()])
+    date = DateField("Date", validators=[DataRequired()])
+    comment  = TextAreaField("Comment")
+    submit= SubmitField("Submit")
+
+class EditExpenseForm(FlaskForm):
+
+    item =StringField("Item",validators=[DataRequired()])
+    cate= StringField("Category",validators=[DataRequired()])
+    # amt = IntegerField("Amount", validators=[DataRequired()])
+    amt= StringField("Amount",validators=[DataRequired()])
     date = DateField("Date", validators=[DataRequired()])
     comment  = TextAreaField("Comment")
     submit= SubmitField("Submit")

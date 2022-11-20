@@ -8,7 +8,7 @@
     <form class="row g-3" method="post">
         {{ form.hidden_tag() }}
         <div class="form-outline col-md-6">
-            {{form.item.label (class ="fw-bold form-label")}} {{ form.item(class="form-control my-2 py-2 placeholder = record type") }}
+            {{form.item.label (class ="fw-bold form-label")}} {{ form.item(class="form-control my-2 py-2") }}
         </div>
 
         <div class="form-outline col-md-6">
@@ -33,45 +33,6 @@
 
     </form>
 
-    <div class="row g-3">
-        {% if recent_records  %} 
-            <br>
-            <hr>
-            <h3>List of recent entry</h3>
-            <table class="table table-striped">
-                <thead>
-                    <!-- expense_name, expense_category, expense_amount, expense_date, expense_comment, expense_user_id -->
-                    <tr>
-                        <th>Record Type</th>
-                        <th>Category</th>
-                        <th>Amount</th>
-                        <th>Date</th>
-                        <th>Comment</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for rec in recent_records %}
-                        <tr>
-                            <td>{{ rec.expense_name }}</td>
-                            <td>{{ rec.expense_category }}</td>
-                            <td>{{ rec.expense_amount}}</td>
-                            <td>{{ rec.expense_date }}</td>
-                            <td>{{ rec.expense_comment }}</td>
-                            <td class="text-center"><a href="{{url_for('expense.delete_record', rec_id= rec.expense_id) }}" class="text-center"><i class="bi bi-pencil"></i></a></td>
-                            <td class="text-center"><a href="{{url_for('expense.delete_record', rec_id= rec.expense_id) }}" class="text-center"><i class="bi bi-trash"></i></a></td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        {%  else %} 
-            <br>   
-            <h6 class="fw-bold">You have no records expense / income records</h6>
-        {% endif %}
-       
-    </div>
-  
 </div>
 
      
