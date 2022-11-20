@@ -34,7 +34,7 @@ class ExpenseForm(FlaskForm):
 
     item =SelectField("Record type", choices= [("Expense","Expense"),("Income","Income")], validators=[DataRequired()])
     cate= SelectField("Category", validators=[DataRequired()])
-    amt =IntegerField("Amount", validators=[DataRequired()])
+    amt =DecimalField("Amount", places=2,validators=[DataRequired()])
     date = DateField("Date", validators=[DataRequired()])
     comment  = TextAreaField("Comment")
     submit= SubmitField("Submit")
