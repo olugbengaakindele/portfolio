@@ -1,10 +1,9 @@
 from email.policy import default
 from tokenize import String
 from flask_wtf import FlaskForm
-from wtforms import DecimalRangeField,IntegerField,BooleanField, SelectField,StringField,DateField,SubmitField,DecimalField, EmailField,PasswordField, TextAreaField
+from wtforms import DateField, FloatField,IntegerField,BooleanField, SelectField,StringField,SubmitField,DecimalField, EmailField,PasswordField, TextAreaField
 from wtforms.validators import DataRequired, EqualTo,ValidationError,Email, Length
 from app.expense.models import Users
-
 
 def email_exist(form, field):
     email = Users.query.filter_by(user_email = field.data).first()
@@ -45,8 +44,8 @@ class EditExpenseForm(FlaskForm):
     item =StringField("Item",validators=[DataRequired()])
     cate= StringField("Category",validators=[DataRequired()])
     # amt = IntegerField("Amount", validators=[DataRequired()])
-    amt= StringField("Amount",validators=[DataRequired()])
-    date = DateField("Date", validators=[DataRequired()])
+    amt= FloatField("Amount",places = 2,validators=[DataRequired()])
+    date =DateField("Date", validators=[DataRequired()])
     comment  = TextAreaField("Comment")
     submit= SubmitField("Submit")
 
