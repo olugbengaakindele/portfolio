@@ -26,26 +26,27 @@ const card_func = function() {
         console.log(route)
         fetch(route).then( function(response) {
             response.json().then(function(data){
-                
+                var date_array = []
                 for (let cates of data.type ){
-                    // console.log(cates.type)
-                    // console.log(new Date(start_date.value).getDate() ,"-----", new Date(cates.expense_date).getDate())
+                    date_array.push(cates.expense_date)
+
                     if(cates.expense_date >= start_date.value && cates.expense_date <= end_date.value){
                         console.log(new Date(start_date.value).getDate() ,"-----", new Date(cates.expense_date).getDate())
-                        if (cates.type == 'Expense'){
+                        if (cates.type == 'expense'){
                             expense += cates.amount
-                        }else if(cates.type == 'Income'){
+                        }else if(cates.type == 'income'){
                             income += cates.amount
                         }
                     }
                 }
+                console.log(date_array)
                 income_card.textContent = "Income : "  + dollarUSLocale.format(income);
                 expense_card.textContent = "Expense : "  + dollarUSLocale.format(expense);
                 savings_card.textContent = "Savings : "  + dollarUSLocale.format(income - expense);
             })
         });
     }
- return true;
+ return date_array;
 };
 
 // const ass= [1,2,3]

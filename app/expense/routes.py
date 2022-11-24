@@ -1,6 +1,6 @@
 from psycopg2 import Date
 from app.expense import expense
-from flask import Flask, jsonify, render_template, request, url_for, flash,redirect
+from flask import Flask, jsonify, render_template, request, url_for, flash,redirect,json
 from app.expense.forms import *
 from app.expense.models import Expense, Users,Settings
 from flask_login import login_user,login_required,logout_user, current_user
@@ -72,7 +72,7 @@ def expense_tracker():
         amt = form.amt.data
         date = form.date.data
         comment = form.comment.data
-        Expense.new_expense(type,cate,amt,date,comment, current_user.id)
+        Expense.new_expense(type.lower(),cate.lower(),amt,date,comment, current_user.id)
         flash('A new record has been created')
         return redirect(url_for('expense.expense_tracker'))
 
@@ -190,9 +190,13 @@ def expense_dashboard():
 
 @expense.route("/expense/display")
 def edit_expense():
-    all_records=Expense.query.filter_by(expense_user_id = current_user.id).order_by(Expense.expense_date.desc())
+    all_records=Expense.query.filter_by(expense_user_id = current_user.id).order_by(Expense.expense_date.desc()).all()
+    inc_exp = []
+    for inc,_ in all_records:
+        inc_exp.append(inc.expense_amount)
 
-    return render_template("display_expenses.html",title='login',  project = "expense", all_list= all_records)
+    return render_template("display_expenses.html",title='login',  
+                            inc_json = json.dumps(inc_exp), project = "expense", all_list= all_records)
 
 @expense.route("/expense/record/delete/<rec_id>", methods=['GET','POST'])
 def delete_record(rec_id):
@@ -232,8 +236,8 @@ def edit_record(rec_id):
     form.comment.data = record.expense_comment
  
     if form.validate_on_submit():
-        record.expense_name = request.form.get("item")
-        record.expense_category =  request.form.get("cate")
+        record.expense_name = request.form.get("item").lower()
+        record.expense_category =  request.form.get("cate").lower()
         record.expense_amount =  request.form.get("amt")
         record.expense_date = request.form.get("date")
         record.expense_comment =  request.form.get("comment")
